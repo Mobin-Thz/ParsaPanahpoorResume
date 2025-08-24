@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlSanitizer" Version="9.0.886" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
+    <ProjectReference Include="..\Resume.Infra.Data\Resume.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
