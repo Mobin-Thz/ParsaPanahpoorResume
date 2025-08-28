@@ -1,8 +1,8 @@
-﻿using Resume.Infra.Data.Context;
-using Resume.Application.Common.Interfaces;
+﻿using Resume.Application.Common.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 using Resume.Domain.Entity.Reservation;
+using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Repository
 {

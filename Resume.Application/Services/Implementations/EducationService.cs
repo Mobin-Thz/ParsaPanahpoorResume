@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resume.Application.Commands.EducationCommand;
 using Resume.Application.Common.Interfaces;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.IRepository;
-using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Education;
 using Resume.Infra.Data.Context;
 using Resume.Infra.Data.Repository;
@@ -29,7 +29,7 @@ namespace Resume.Application.Services.Implementations
         #endregion
 
 
-        public async Task<Education> GetEducationById(ulong id, CancellationToken cancellationToken)
+        public async Task<EducationCommand> GetEducationById(ulong id, CancellationToken cancellationToken)
         {
             return await _educationRepository.GetByIdAsync(id,  cancellationToken);
         }
@@ -56,7 +56,7 @@ namespace Resume.Application.Services.Implementations
         {
             if (id == 0) return new CreateOrEditEducationViewModel() { Id = 0 };
 
-            Education education = await GetEducationById(id, cancellationToken);
+            EducationCommand education = await GetEducationById(id, cancellationToken);
 
             if (education == null) return new CreateOrEditEducationViewModel() { Id = 0 };
 
@@ -75,7 +75,7 @@ namespace Resume.Application.Services.Implementations
         {
             if (education.Id == 0)
             {
-                var newEducation = new Education()
+                var newEducation = new EducationCommand()
                 {
                     Description = education.Description,
                     EndDate = education.EndDate,
@@ -89,7 +89,7 @@ namespace Resume.Application.Services.Implementations
                 return true;
             }
 
-            Education currentEducation = await GetEducationById(education.Id,  cancellationToken);
+            EducationCommand currentEducation = await GetEducationById(education.Id,  cancellationToken);
 
             if (currentEducation == null) return false;
 
@@ -107,7 +107,7 @@ namespace Resume.Application.Services.Implementations
 
         public async Task<bool> DeleteEducation(ulong id, CancellationToken cancellationToken)
         {
-            Education education = await GetEducationById(id,  cancellationToken);
+            EducationCommand education = await GetEducationById(id,  cancellationToken);
 
             if (education == null) return false;
 

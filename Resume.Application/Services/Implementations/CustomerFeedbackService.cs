@@ -5,7 +5,7 @@ using Resume.Domain.ViewModels.CustomerFeedback;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Application.Services.Implementations
 {

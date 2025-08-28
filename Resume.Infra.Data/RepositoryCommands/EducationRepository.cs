@@ -1,6 +1,6 @@
 ﻿using Resume.Domain.IRepository;
 using Resume.Domain.Models;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;

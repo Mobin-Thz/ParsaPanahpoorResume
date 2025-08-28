@@ -3,7 +3,7 @@ using Resume.Application.Security;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Message;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

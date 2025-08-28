@@ -3,7 +3,7 @@ using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Models;
 using System.Linq;
 
-namespace Resume.Infra.Data.Context
+namespace Resume.Infra.Data.SQLServer.Context
 {
     public class AppDbContext : DbContext
     {

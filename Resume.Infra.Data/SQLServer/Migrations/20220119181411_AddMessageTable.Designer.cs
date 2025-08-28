@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220126181450_AddMapScr")]
-    partial class AddMapScr
+    [Migration("20220119181411_AddMessageTable")]
+    partial class AddMessageTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,9 +170,6 @@ namespace Resume.Infra.Data.Migrations
                     b.Property<string>("Job")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("MapSrc")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)

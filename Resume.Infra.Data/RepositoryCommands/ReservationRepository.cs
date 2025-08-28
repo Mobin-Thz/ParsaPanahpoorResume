@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Primitives;
 using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Repository;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

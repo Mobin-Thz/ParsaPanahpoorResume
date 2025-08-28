@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211129193507_InitialDb")]
-    partial class InitialDb
+    [Migration("20211208163942_AddCustomerFeedbackTable")]
+    partial class AddCustomerFeedbackTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,34 @@ namespace Resume.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Resume.Domain.Models.CustomerFeedback", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerFeedbacks");
+                });
 
             modelBuilder.Entity("Resume.Domain.Models.ThingIDo", b =>
                 {
@@ -30,7 +58,7 @@ namespace Resume.Infra.Data.Migrations
                     b.Property<int>("ColumnLg")
                         .HasColumnType("int");
 
-                    b.Property<string>("Desctiption")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
@@ -39,6 +67,9 @@ namespace Resume.Infra.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -46,7 +77,7 @@ namespace Resume.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("thingIDos");
+                    b.ToTable("ThingIDos");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,7 +11,6 @@ using Resume.Application.Common.Interfaces;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Repository;
-using Resume.Infra.Data.Context;
 using Resume.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 using Resume.Domain.IRepository;
+using Resume.Infra.Data.SQLServer.Context;
 namespace Resume.Web;
 
 public class Program

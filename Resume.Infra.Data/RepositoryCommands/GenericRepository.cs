@@ -3,7 +3,7 @@ using Resume.Application.Common.Interfaces;
 using Resume.Domain.Entity.Common;
 using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Models;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

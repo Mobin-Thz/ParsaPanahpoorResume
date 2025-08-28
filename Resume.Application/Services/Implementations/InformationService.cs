@@ -2,7 +2,7 @@
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Information;
-using Resume.Infra.Data.Context;
+using Resume.Infra.Data.SQLServer.Context;
 using System.Linq;
 using System.Threading.Tasks;
 

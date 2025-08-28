@@ -15,5 +15,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MongoDb\" />
+    <Folder Include="RepositoryQueries\" />
+  </ItemGroup>
+
 
 </Project>
