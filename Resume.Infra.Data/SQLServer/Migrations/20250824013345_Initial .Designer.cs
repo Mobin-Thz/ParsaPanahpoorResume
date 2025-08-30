@@ -11,7 +11,7 @@ using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SqlDbContext))]
     [Migration("20250824013345_Initial ")]
     partial class Initial
     {

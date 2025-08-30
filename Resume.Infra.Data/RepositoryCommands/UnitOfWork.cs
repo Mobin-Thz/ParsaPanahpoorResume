@@ -6,9 +6,9 @@ using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Repository
 {
-    public class UnitOfWork(AppDbContext dbContext): IUnitOfWork
+    public class UnitOfWork(SqlDbContext dbContext): IUnitOfWork
     {
-        private readonly AppDbContext _dbContext = dbContext;
+        private readonly SqlDbContext _dbContext = dbContext;
 
 
         public async Task<int> SaveChangesAsync()

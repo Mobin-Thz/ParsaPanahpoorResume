@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Resume.Infra.Data.SQLServer.Context
 {
-    public class AppDbContext : DbContext
+    public class SqlDbContext : DbContext
     {
 
         #region Constructor
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
 
         }
@@ -20,7 +20,7 @@ namespace Resume.Infra.Data.SQLServer.Context
         public DbSet<ThingIDo> ThingIDos { get; set; }
         public DbSet<CustomerFeedback> CustomerFeedbacks { get; set; }
         public DbSet<CustomerLogo> CustomerLogos { get; set; }
-        public DbSet<Education> Educations { get; set; }
+        public DbSet<EducationQuery> Educations { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }

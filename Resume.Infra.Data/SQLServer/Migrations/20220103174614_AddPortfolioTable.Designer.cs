@@ -8,7 +8,7 @@ using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SqlDbContext))]
     [Migration("20220103174614_AddPortfolioTable")]
     partial class AddPortfolioTable
     {

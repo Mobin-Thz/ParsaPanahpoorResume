@@ -12,9 +12,9 @@ namespace Resume.Application.Services.Implementations
     {
 
         #region Constructor
-        private readonly AppDbContext _context;
+        private readonly SqlDbContext _context;
 
-        public ExperienceService(AppDbContext context)
+        public ExperienceService(SqlDbContext context)
         {
             _context = context;
         }

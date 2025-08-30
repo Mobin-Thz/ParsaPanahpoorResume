@@ -13,9 +13,9 @@ namespace Resume.Application.Services.Implementations
     {
 
         #region Constructor
-        private readonly AppDbContext _context;
+        private readonly SqlDbContext _context;
 
-        public SkillService(AppDbContext context)
+        public SkillService(SqlDbContext context)
         {
             _context = context;
         }

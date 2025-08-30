@@ -8,7 +8,7 @@ using Resume.Infra.Data.SQLServer.Context;
 
 namespace Resume.Infra.Data.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(SqlDbContext))]
     [Migration("20211208163942_AddCustomerFeedbackTable")]
     partial class AddCustomerFeedbackTable
     {

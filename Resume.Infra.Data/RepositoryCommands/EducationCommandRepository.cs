@@ -1,4 +1,4 @@
-﻿using Resume.Domain.IRepository;
+﻿using Resume.Domain.Interfaces.ICommandRepository;
 using Resume.Domain.Models;
 using Resume.Infra.Data.SQLServer.Context;
 using System;
@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace Resume.Infra.Data.Repository
 {
-    public class EducationRepository : GenericRepository<Education>, IEducationRepository
+    public class EducationCommandRepository : GenericCommandRepository<Education>, IEducationCommandRepository
     {
 
-
-        public EducationRepository(AppDbContext dbContext) : base(dbContext)
+        public EducationCommandRepository(SqlDbContext dbContext) : base(dbContext)
         {
 
         }

@@ -10,8 +10,11 @@ using Microsoft.Extensions.Logging;
 using Resume.Application.Common.Interfaces;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
+using Resume.Domain.IRepository;
 using Resume.Domain.Repository;
+using Resume.Infra.Data.MongoDb;
 using Resume.Infra.Data.Repository;
+using Resume.Infra.Data.SQLServer.Context;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,8 +22,6 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-using Resume.Domain.IRepository;
-using Resume.Infra.Data.SQLServer.Context;
 namespace Resume.Web;
 
 public class Program
@@ -32,9 +33,17 @@ public class Program
 
         #region Add DbContext
 
-        builder.Services.AddDbContext<AppDbContext>(options =>
+        builder.Services.AddDbContext<SqlDbContext>(options =>
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+
+        builder.Services.AddDbContext<MongoDbContext>(options =>
+        {
+            var mongoConnection = builder.Configuration.GetConnectionString("MongoDb");
+            var dbName = builder.Configuration["MongoSettings:DatabaseName"];
+
+            options.UseMongoDB(mongoConnection, dbName);
         });
 
         #endregion
@@ -42,7 +51,7 @@ public class Program
         #region Registration 
 
         //Service Registration
-        
+
         builder.Services.AddScoped<IThingIDoService, ThingIDoService>();
         builder.Services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
         builder.Services.AddScoped<ICustomerLogoService, CustomerLogoService>();
@@ -59,7 +68,7 @@ public class Program
         //Repository Registration
 
         builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-        builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+        builder.Services.AddScoped<IEducationRepository, EducationCommandRepository>();
 
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();

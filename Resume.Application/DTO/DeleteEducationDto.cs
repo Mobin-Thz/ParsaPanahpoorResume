@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Queries.EducationQuery
+namespace Resume.Application.DTO
 {
-    internal class EducationQuery
+    public class DeleteEducationDto
     {
+        public ulong Id { get; set; }
+
     }
 }

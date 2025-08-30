@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Infra.Data.Repository;
 
-public class ReservationRepository : GenericRepository<ReservationDate>, IReservationRepository
+public class ReservationRepository : GenericCommandRepository<ReservationDate>, IReservationRepository
 
 {
     #region Ctor
 
-    private readonly AppDbContext _context;
+    private readonly SqlDbContext _context;
 
-    public ReservationRepository(AppDbContext dbContext):base(dbContext)
+    public ReservationRepository(SqlDbContext dbContext):base(dbContext)
     {
         _context = dbContext;
     }

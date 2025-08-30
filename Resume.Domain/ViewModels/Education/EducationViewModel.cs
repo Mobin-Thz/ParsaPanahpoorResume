@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Resume.Domain.Entity.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.Education
 {
-    public class EducationViewModel
+    public class EducationViewModel : IEntity
     {
         public ulong Id { get; set; }
 
