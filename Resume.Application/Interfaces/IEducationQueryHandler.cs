@@ -1,5 +1,5 @@
 ﻿using Resume.Application.Commands.EducationCommand;
-using Resume.Application.DTO;
+using Resume.Application.DTO.Education;
 using Resume.Application.Queries.EducationQuery;
 using Resume.Domain.ViewModels.Education;
 using System;

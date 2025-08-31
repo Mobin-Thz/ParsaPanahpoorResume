@@ -1,6 +1,7 @@
 ﻿using Resume.Application.Common.Interfaces;
-using Resume.Application.DTO;
+using Resume.Application.DTO.Education;
 using Resume.Application.Interfaces;
+using Resume.Domain.Interfaces.ICommandRepository;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Education;
 using System;
@@ -18,10 +19,10 @@ namespace Resume.Application.Commands.EducationCommand
 
 
         #region ctor
-        private readonly IEducationRepository _educationRepository;
+        private readonly IEducationCommandRepository _educationRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EducationCommandHandler(IEducationRepository educationRepository, IUnitOfWork unitOfWork)
+        public EducationCommandHandler(IEducationCommandRepository educationRepository, IUnitOfWork unitOfWork)
         {
             _educationRepository = educationRepository;
             _unitOfWork = unitOfWork;
@@ -32,14 +33,15 @@ namespace Resume.Application.Commands.EducationCommand
 
         public async Task<bool> EditEducation(UpdateEducationDto dto, CancellationToken cancellationToken)
         {
-            var education = await _educationRepository.GetByIdAsync(dto.Id, cancellationToken);
-            if (education == null) return false;
-
-            education.Title = dto.Title;
-            education.Description = dto.Description;
-            education.StartDate = dto.StartDate;
-            education.EndDate = dto.EndDate;
-            education.Order = dto.Order;
+            var education = new Education
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                Description = dto.Description,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                Order = dto.Order
+            };
 
             _educationRepository.Update(education);
             await _unitOfWork.SaveChangesAsync();

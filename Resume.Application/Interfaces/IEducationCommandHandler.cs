@@ -1,4 +1,4 @@
-﻿using Resume.Application.DTO;
+﻿using Resume.Application.DTO.Education;
 using Resume.Domain.ViewModels.Education;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,6 @@ namespace Resume.Application.Interfaces
 
         Task<bool> EditEducation(UpdateEducationDto dto, CancellationToken cancellationToken);
         Task<ulong> CreateEducation(CreateEducationDto dto, CancellationToken cancellationToken);
-
         Task<bool> DeleteEducation(DeleteEducationDto dto, CancellationToken cancellationToken);
     }
 }

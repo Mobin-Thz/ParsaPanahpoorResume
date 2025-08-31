@@ -16,9 +16,9 @@ namespace Resume.Infra.Data.Repository
 
     {
 
-        protected readonly SqlDbContext _dbContext ;
+        protected readonly AppDbContext _dbContext ;
 
-        public GenericCommandRepository(SqlDbContext dbContext)
+        public GenericCommandRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

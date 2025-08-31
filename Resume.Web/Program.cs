@@ -7,13 +7,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Resume.Application.Commands.EducationCommand;
+using Resume.Application.Commands.ReservationCommand;
 using Resume.Application.Common.Interfaces;
+using Resume.Application.Interfaces;
+using Resume.Application.Queries.EducationQuery;
+using Resume.Application.Queries.ReservationQuery;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
-using Resume.Domain.IRepository;
-using Resume.Domain.Repository;
+using Resume.Domain.Interfaces.ICommandRepository;
+using Resume.Domain.Interfaces.IQueryRepository;
 using Resume.Infra.Data.MongoDb;
 using Resume.Infra.Data.Repository;
+using Resume.Infra.Data.RepositoryQueries;
 using Resume.Infra.Data.SQLServer.Context;
 using System;
 using System.Collections.Generic;
@@ -33,7 +39,7 @@ public class Program
 
         #region Add DbContext
 
-        builder.Services.AddDbContext<SqlDbContext>(options =>
+        builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
@@ -55,21 +61,27 @@ public class Program
         builder.Services.AddScoped<IThingIDoService, ThingIDoService>();
         builder.Services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
         builder.Services.AddScoped<ICustomerLogoService, CustomerLogoService>();
-        builder.Services.AddScoped<IEducationService, EducationService>();
+        //builder.Services.AddScoped<IEducationService, EducationService>();
         builder.Services.AddScoped<IExperienceService, ExperienceService>();
         builder.Services.AddScoped<ISkillService, SkillService>();
         builder.Services.AddScoped<IPortfolioService, PortfolioService>();
         builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
         builder.Services.AddScoped<IInformationService, InformationService>();
         builder.Services.AddScoped<IMessageService, MessageService>();
-        builder.Services.AddScoped<IReservationService, ReservationService>();
+        //builder.Services.AddScoped<IReservationService, ReservationService>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+        //Handler Registration
+        builder.Services.AddScoped<IEducationCommandHandler, EducationCommandHandler>();
+        builder.Services.AddScoped<IEducationQueryHandler, EducationQueryHandler>();
+        builder.Services.AddScoped<IReservationCommandHandler, ReservationCommandHandler>();
+        builder.Services.AddScoped<IReservationQueryHandler, ReservationQueryHandler>();
         //Repository Registration
 
-        builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-        builder.Services.AddScoped<IEducationRepository, EducationCommandRepository>();
-
+        builder.Services.AddScoped<IReservationCommandRepository, ReservationCommandRepository>();
+        builder.Services.AddScoped<IReservationQueryRepository, ReservationQueryRepository>();
+        builder.Services.AddScoped<IEducationCommandRepository, EducationCommandRepository>();
+        builder.Services.AddScoped<IEducationQueryRepository, EducationQueryRepository>();
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
         #endregion

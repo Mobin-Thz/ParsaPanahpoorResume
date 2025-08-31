@@ -1,6 +1,6 @@
 ﻿using Resume.Application.Commands.EducationCommand;
 using Resume.Application.Common.Interfaces;
-using Resume.Application.DTO;
+using Resume.Application.DTO.Education;
 using Resume.Application.Interfaces;
 using Resume.Domain.Interfaces.IQueryRepository;
 using Resume.Domain.ViewModels.Education;
@@ -30,7 +30,18 @@ namespace Resume.Application.Queries.EducationQuery
 
         public async Task<EducationViewModel> GetEducationById(ulong id, CancellationToken cancellationToken)
         {
-            return await _educationRepository.GetByIdAsync(id, cancellationToken);
+            var education = await _educationRepository.GetByIdAsync(id, cancellationToken);
+            if (education == null) return null;
+
+            return new EducationViewModel
+            {
+                Id = education.Id,
+                Title = education.Title,
+                Description = education.Description,
+                StartDate = education.StartDate,
+                EndDate = education.EndDate,
+                Order = education.Order
+            };
         }
 
         public async Task<List<EducationViewModel>> GetAllEducations(CancellationToken cancellationToken)

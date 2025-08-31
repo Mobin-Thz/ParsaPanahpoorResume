@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Resume.Infra.Data.SQLServer.Context
 {
-    public class SqlDbContext : DbContext
+    public class AppDbContext : DbContext
     {
 
         #region Constructor
-        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
@@ -20,7 +20,7 @@ namespace Resume.Infra.Data.SQLServer.Context
         public DbSet<ThingIDo> ThingIDos { get; set; }
         public DbSet<CustomerFeedback> CustomerFeedbacks { get; set; }
         public DbSet<CustomerLogo> CustomerLogos { get; set; }
-        public DbSet<EducationQuery> Educations { get; set; }
+        public DbSet<Education> Educations { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
@@ -35,7 +35,7 @@ namespace Resume.Infra.Data.SQLServer.Context
 
         #endregion
 
-        #region On Model Cretaing
+        #region On Model Creatiing
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

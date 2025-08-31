@@ -12,7 +12,7 @@ namespace Resume.Infra.Data.Repository
     public class EducationCommandRepository : GenericCommandRepository<Education>, IEducationCommandRepository
     {
 
-        public EducationCommandRepository(SqlDbContext dbContext) : base(dbContext)
+        public EducationCommandRepository(AppDbContext dbContext) : base(dbContext)
         {
 
         }

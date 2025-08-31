@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Interfaces;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.ViewModels.Page;
 using System;
@@ -13,12 +14,12 @@ namespace Resume.Web.Controllers
     {
 
         #region Constructor
-        private readonly IEducationService _educationService;
+        private readonly IEducationQueryHandler _educationQuery;
         private readonly IExperienceService _experienceService;
         private readonly ISkillService _skillService;
-        public ResumeController(IEducationService educationService, IExperienceService experienceService, ISkillService skillService)
+        public ResumeController(IEducationQueryHandler educationQuery, IExperienceService experienceService, ISkillService skillService)
         {
-            _educationService = educationService;
+            _educationQuery = educationQuery;
             _experienceService = experienceService;
             _skillService = skillService;
         }
@@ -28,7 +29,7 @@ namespace Resume.Web.Controllers
         {
             ResumePageViewModel model = new ResumePageViewModel()
             {
-                Educations = await _educationService.GetAllEducations(cancellationToken),
+                Educations = await _educationQuery.GetAllEducations(cancellationToken),
                 Experiences = await _experienceService.GetAllExperiences(),
                 Skills = await _skillService.GetAllSkills()
             };
