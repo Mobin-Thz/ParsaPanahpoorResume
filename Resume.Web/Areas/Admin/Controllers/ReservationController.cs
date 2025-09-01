@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Resume.Application.DTO.Education;
+using Resume.Application.DTO.Reservation;
+using Resume.Application.Interfaces;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.ViewModels.Reservation;
@@ -10,41 +13,92 @@ namespace Resume.Web.Areas.Admin.Controllers;
 
 public class ReservationController : AdminBaseController
 {
-    private readonly IReservationService _reservationService;
-    public ReservationController(IReservationService reservationService)
+    #region Constructor
+    private readonly IReservationCommandHandler _reservationCommand;
+    private readonly IReservationQueryHandler _reservationQuery;
+
+    public ReservationController(IReservationCommandHandler reservationCommand, IReservationQueryHandler reservationQuery)
     {
-        _reservationService = reservationService;
+        _reservationCommand = reservationCommand;
+        _reservationQuery = reservationQuery;
     }
+    #endregion
 
     [HttpGet]
     public async Task<IActionResult> Index(CancellationToken cancellationToken = default)
-        => View(await _reservationService.GetListOfReservations(cancellationToken));
+        => View(await _reservationQuery.GetListOfReservations(cancellationToken));
 
-    public async Task<IActionResult> LoadReservationFormModal(ulong id , 
+
+
+    [HttpGet]
+    public async Task<IActionResult> LoadReservationFormModal(ulong id,
         CancellationToken cancellationToken = default)
     {
-        CreateOrUpdateReservationViewModel result = await _reservationService.FillCreateOrUpdateReservationViewModel(id , cancellationToken);
+        if (id == 0) // Create
+        {
+            var model = await _reservationQuery.FillCreateReservationViewModel();
+            return PartialView("_ReservationFormModalPartialCreate", model);
+        }
+        else // Edit
+        {
+            var model = await _reservationQuery.FillUpdateReservationViewModel(id, cancellationToken);
+            return PartialView("_ReservationFormModalPartialEdit", model);
+        }
+    }
+    //public async Task<IActionResult> SubmitReservationFormModal(CreateOrUpdateReservationViewModel Reservation , 
+    //    CancellationToken cancellationToken = default)
+    //{
+    //    var result = await _reservationService.CreateOrEditReservationDate(Reservation , cancellationToken);
 
-        return PartialView("_ReservationFormModalPartial", result);
+    //    if (result) return new JsonResult(new { status = "Success" });
+
+    //    return new JsonResult(new { status = "Error" });
+    //}
+
+    [HttpPost]
+    public async Task<IActionResult> CreateReservation(
+        CreateReservationViewModel reservation,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await _reservationCommand.CreateReservationDate(reservation.ReservationDate, cancellationToken);
+
+        if (result)
+            return Json(new { status = "Success" });
+
+        return Json(new { status = "Error" });
     }
 
-    public async Task<IActionResult> SubmitReservationFormModal(CreateOrUpdateReservationViewModel Reservation , 
+    [HttpPost]
+    public async Task<IActionResult> EditReservation(
+        UpdateReservationViewModel reservation,
         CancellationToken cancellationToken = default)
     {
-        var result = await _reservationService.CreateOrEditReservationDate(Reservation , cancellationToken);
+        var dto = new ReservationDateDto
+        {
+            Id = reservation.Id,
+            ReservationDate = reservation.ReservationDate
+        };
 
-        if (result) return new JsonResult(new { status = "Success" });
+        var result = await _reservationCommand.EditReservationDate(dto, cancellationToken);
 
-        return new JsonResult(new { status = "Error" });
+        if (result)
+            return Json(new { status = "Success" });
+
+        return Json(new { status = "Error" });
     }
 
-    public async Task<IActionResult> DeleteReservation(ulong id , 
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteReservation(
+        ulong id,
         CancellationToken cancellationToken = default)
     {
-        var result = await _reservationService.DeleteReservationDate(id , cancellationToken);
+        var dto = new ReservationDateDto { Id = id };
+        var result = await _reservationCommand.DeleteReservationDate(dto, cancellationToken);
 
-        if (result) return new JsonResult(new { status = "Success" });
+        if (result)
+            return Json(new { status = "Success" });
 
-        return new JsonResult(new { status = "Error" });
+        return Json(new { status = "Error" });
     }
 }

@@ -1,4 +1,5 @@
-﻿using Resume.Domain.Entity.Reservation;
+﻿using Resume.Application.Convertors;
+using Resume.Domain.Entity.Reservation;
 using Resume.Domain.ViewModels.Reservation;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,12 @@ namespace Resume.Application.Interfaces
 {
     public interface IReservationQueryHandler
     {
-        Task<CreateOrUpdateReservationViewModel> FillCreateOrUpdateReservationViewModel(ulong id,
-         CancellationToken cancellationToken);
+
+        Task<UpdateReservationViewModel> FillUpdateReservationViewModel(ulong id, CancellationToken cancellationToken);
+
+        Task<CreateReservationViewModel> FillCreateReservationViewModel();
 
         Task<List<ReservationDate>> GetListOfReservations(CancellationToken cancellationToken);
-
 
         Task<ReservationDate> GetReservationDate(ulong reservationDateId, CancellationToken cancellationToken);
 

@@ -1,11 +1,12 @@
-﻿@model Resume.Domain.ViewModels.Reservation.CreateOrUpdateReservationViewModel
+﻿@using Resume.Domain.ViewModels.Reservation
+@model ReservationBaseViewModel
 
 @{
-    bool isCreate = Model.Id == 0 ? true : false;
+    bool isCreate = Model is CreateReservationViewModel;
 }
 
-
-<form id="ReservationForm" asp-area="Admin" asp-controller="Reservation" asp-action="SubmitReservationFormModal"
+<form id="ReservationForm" asp-area="Admin" asp-controller="Reservation"
+      asp-action="SubmitReservationFormModal"
       data-ajax="true" data-ajax-begin="StartLoading()" data-ajax-success="ReservationFormSubmited">
 
     <div class="modal-header">
@@ -15,15 +16,14 @@
         </button>
     </div>
 
-
     <div class="modal-body">
-
         <div class="row">
             <div class="col-12">
 
-                @if (!isCreate)
+                @* Only show Id for edit *@
+                @if (Model is UpdateReservationViewModel updateModel)
                 {
-                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" name="Id" value="@updateModel.Id" />
                 }
 
                 <div class="form-group">
@@ -35,12 +35,13 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-bold btn-pure float-right @(isCreate ? "btn-success" : "btn-warning")">@(isCreate ? "ایجاد" : "ویرایش")</button>
+                    <button type="submit" class="btn btn-bold btn-pure float-right @(isCreate ? "btn-success" : "btn-warning")">
+                        @(isCreate ? "ایجاد" : "ویرایش")
+                    </button>
                 </div>
 
             </div>
         </div>
-
     </div>
 
 </form>

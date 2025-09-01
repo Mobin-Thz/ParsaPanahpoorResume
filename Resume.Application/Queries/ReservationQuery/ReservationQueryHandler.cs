@@ -37,23 +37,24 @@ namespace Resume.Application.Queries.ReservationQuery
             => await _reservationRepository.GetAllAsync(cancellationToken);
 
 
-
-        public async Task<CreateOrUpdateReservationViewModel> FillCreateOrUpdateReservationViewModel(ulong id,
-            CancellationToken cancellationToken)
+        public Task<CreateReservationViewModel> FillCreateReservationViewModel()
         {
-            if (id == 0)
-                return new CreateOrUpdateReservationViewModel() { Id = 0 };
+            return Task.FromResult(new CreateReservationViewModel());
+        }
 
+        public async Task<UpdateReservationViewModel> FillUpdateReservationViewModel(ulong id, CancellationToken cancellationToken)
+        {
             ReservationDate reservationDate = await GetReservationDate(id, cancellationToken);
 
             if (reservationDate == null)
-                return new CreateOrUpdateReservationViewModel() { Id = 0 };
+                return null; 
 
-            return new CreateOrUpdateReservationViewModel()
+            return new UpdateReservationViewModel
             {
                 Id = reservationDate.Id,
-                ReservationDate = reservationDate.Date.ToShamsi(),
+                ReservationDate = reservationDate.Date.ToShamsi()
             };
         }
+
     }
 }

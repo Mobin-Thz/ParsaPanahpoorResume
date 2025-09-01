@@ -23,12 +23,6 @@ public interface IReservationService
         string date,
         CancellationToken cancellationToken);
 
-    Task<CreateOrUpdateReservationViewModel> FillCreateOrUpdateReservationViewModel(ulong id,
-        CancellationToken cancellationToken);
-
-    Task<bool> CreateOrEditReservationDate(CreateOrUpdateReservationViewModel reservationDate,
-        CancellationToken cancellationToken);
-
     Task<bool> DeleteReservationDate(ulong id, 
         CancellationToken cancellationToken);
 }

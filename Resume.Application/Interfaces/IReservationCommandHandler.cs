@@ -13,7 +13,7 @@ namespace Resume.Application.Interfaces
     public interface IReservationCommandHandler
     {
 
-        Task<bool> CreateReservation(string date,
+        Task<bool> CreateReservationDate(string date,
             CancellationToken cancellationToken);
 
         Task<bool> EditReservationDate(ReservationDateDto dto,

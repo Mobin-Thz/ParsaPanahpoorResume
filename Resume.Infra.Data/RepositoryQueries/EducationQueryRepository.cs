@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Infra.Data.RepositoryQueries
 {
-    public class EducationQueryRepository :GenericQueryRepository<EducationViewModel>, IEducationQueryRepository
+    public class EducationQueryRepository :GenericQueryRepository<Education>, IEducationQueryRepository
     {
         public EducationQueryRepository(MongoDbContext dbContext) : base(dbContext)
         {

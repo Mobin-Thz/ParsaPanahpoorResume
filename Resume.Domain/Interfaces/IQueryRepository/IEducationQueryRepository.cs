@@ -12,9 +12,9 @@ namespace Resume.Domain.Interfaces.IQueryRepository
     public interface IEducationQueryRepository
     {
 
-        Task<EducationViewModel?> GetByIdAsync(ulong id, CancellationToken cancellationToken);
+        Task<Education?> GetByIdAsync(ulong id, CancellationToken cancellationToken);
 
-        Task<List<EducationViewModel>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<List<Education>> GetAllAsync(CancellationToken cancellationToken = default);
 
     }
 }

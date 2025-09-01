@@ -39,38 +39,62 @@ namespace Resume.Web.Areas.Admin.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> SubmitEducationFormModal(
+        //    UpdateEducationDto dto, CancellationToken cancellationToken)
+        //{
+        //    bool result;
+
+        //    if (dto.Id == 0)
+        //    {
+        //        var createDto = new CreateEducationDto
+        //        {
+        //            Title = dto.Title,
+        //            Description = dto.Description,
+        //            StartDate = dto.StartDate,
+        //            EndDate = dto.EndDate,
+        //            Order = dto.Order
+        //        };
+
+        //        await _educationCommand.CreateEducation(createDto, cancellationToken);
+        //        result = true;
+        //    }
+        //    else
+        //    {
+        //        result = await _educationCommand.EditEducation(dto, cancellationToken);
+        //    }
+
+        //    if (result)
+        //        return Json(new { status = "Success" });
+
+        //    return Json(new { status = "Error" });
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> SubmitEducationFormModal(
-            UpdateEducationDto dto, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateEducation(CreateEducationDto dto, CancellationToken cancellationToken)
         {
-            bool result;
+            if (dto == null) return BadRequest();
 
-            if (dto.Id == 0)
-            {
-                var createDto = new CreateEducationDto
-                {
-                    Title = dto.Title,
-                    Description = dto.Description,
-                    StartDate = dto.StartDate,
-                    EndDate = dto.EndDate,
-                    Order = dto.Order
-                };
+            var id = await _educationCommand.CreateEducation(dto, cancellationToken);
 
-                await _educationCommand.CreateEducation(createDto, cancellationToken);
-                result = true;
-            }
-            else
-            {
-                result = await _educationCommand.EditEducation(dto, cancellationToken);
-            }
+            if (id > 0)
+                return Json(new { status = "Success", id });
+
+            return Json(new { status = "Error" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditEducation(UpdateEducationDto dto, CancellationToken cancellationToken)
+        {
+            if (dto == null || dto.Id == 0) return BadRequest();
+
+            var result = await _educationCommand.EditEducation(dto, cancellationToken);
 
             if (result)
                 return Json(new { status = "Success" });
 
             return Json(new { status = "Error" });
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> DeleteEducation(ulong id, CancellationToken cancellationToken)

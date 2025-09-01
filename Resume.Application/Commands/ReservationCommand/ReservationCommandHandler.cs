@@ -34,7 +34,7 @@ namespace Resume.Application.Commands.ReservationCommand
         #endregion
 
 
-        public async Task<bool> CreateReservation(string date,
+        public async Task<bool> CreateReservationDate(string date,
             CancellationToken cancellationToken)
         {
             await _reservationRepository.AddAsync(new ReservationDate()

@@ -1,7 +1,8 @@
 ﻿@model Resume.Domain.ViewModels.Education.CreateOrEditEducationViewModel
 
 @{
-    bool isCreate = Model.Id == 0 ? true : false;
+    bool isCreate = Model.Id == 0;
+    string actionName = isCreate ? "CreateEducation" : "EditEducation";
 }
 
 
