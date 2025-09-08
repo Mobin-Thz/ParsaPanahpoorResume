@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Resume.Application;
 using Resume.Application.Common.Interfaces;
 using Resume.Application.CQRS.Commands.EducationCommand;
 using Resume.Application.CQRS.Commands.ReservationCommand;
@@ -29,6 +30,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddApplicationServices();
+
 
         #region DbContext
 
