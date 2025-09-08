@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resume.Application.Generator
+namespace Resume.Application.Utilities.Generator
 {
     public class CodeGenerator
     {

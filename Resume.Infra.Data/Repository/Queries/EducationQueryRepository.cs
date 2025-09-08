@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resume.Infra.Data.RepositoryQueries
+namespace Resume.Infra.Data.Repository.Queries
 {
     public class EducationQueryRepository :GenericQueryRepository<Education>, IEducationQueryRepository
     {

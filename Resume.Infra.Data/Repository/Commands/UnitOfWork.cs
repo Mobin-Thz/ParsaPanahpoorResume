@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Resume.Domain.Entity.Reservation;
 using Resume.Infra.Data.SQLServer.Context;
 
-namespace Resume.Infra.Data.Repository
+namespace Resume.Infra.Data.Repository.Commands
 {
     public class UnitOfWork(AppDbContext dbContext): IUnitOfWork
     {

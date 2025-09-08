@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Eetensions
+namespace Resume.Application.Utilities.Eetensions
 {
     public static class UploadFileExtension
     {

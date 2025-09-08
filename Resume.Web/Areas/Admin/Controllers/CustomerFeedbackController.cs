@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Eetensions;
-using Resume.Application.Generator;
 using Resume.Application.Services.Interfaces;
-using Resume.Application.StaticTools;
+using Resume.Application.Utilities.Eetensions;
+using Resume.Application.Utilities.Generator;
+using Resume.Application.Utilities.StaticTools;
 using Resume.Domain.ViewModels.CustomerFeedback;
 using Resume.Web.Areas.Controllers;
 using System;

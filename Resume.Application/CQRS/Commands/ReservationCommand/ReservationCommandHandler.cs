@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Commands.ReservationCommand
+namespace Resume.Application.CQRS.Commands.ReservationCommand
 {
     public class ReservationCommandHandler : IReservationCommandHandler
     {

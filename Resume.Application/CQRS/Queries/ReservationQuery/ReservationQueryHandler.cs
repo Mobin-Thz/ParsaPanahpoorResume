@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Queries.ReservationQuery
+namespace Resume.Application.CQRS.Queries.ReservationQuery
 {
     public class ReservationQueryHandler: IReservationQueryHandler
     {

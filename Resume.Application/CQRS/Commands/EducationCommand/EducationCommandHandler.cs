@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Commands.EducationCommand
+namespace Resume.Application.CQRS.Commands.EducationCommand
 {
 
     public class EducationCommandHandler : IEducationCommandHandler

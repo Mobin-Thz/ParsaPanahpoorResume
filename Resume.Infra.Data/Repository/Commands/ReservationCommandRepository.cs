@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Infra.Data.Repository;
+namespace Resume.Infra.Data.Repository.Commands;
 
 public class ReservationCommandRepository : GenericCommandRepository<ReservationDate>, IReservationCommandRepository
 

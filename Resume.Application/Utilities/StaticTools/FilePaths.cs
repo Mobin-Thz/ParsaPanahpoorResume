@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Resume.Application.StaticTools
+namespace Resume.Application.Utilities.StaticTools
 {
     public static class FilePaths
     {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Infra.Data.RepositoryQueries
+namespace Resume.Infra.Data.Repository.Queries
 {
 
     public class GenericQueryRepository<TEntity> : IGenericQueryRepository<TEntity> where TEntity : class, IEntity
@@ -21,7 +21,7 @@ namespace Resume.Infra.Data.RepositoryQueries
         }
 
 
-        public async Task<TEntity?> GetByIdAsync(ulong Id, CancellationToken cancellationToken)
+        public async Task<TEntity> GetByIdAsync(ulong Id, CancellationToken cancellationToken)
         {
             return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(p => p.Id == Id, cancellationToken);
         }

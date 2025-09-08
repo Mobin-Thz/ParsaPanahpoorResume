@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Infra.Data.Repository
+namespace Resume.Infra.Data.Repository.Commands
 {
 
     public class GenericCommandRepository<TEntity>: IGenericCommandRepository<TEntity> where TEntity : class, IEntity

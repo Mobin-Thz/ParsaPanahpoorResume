@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Queries.EducationQuery
+namespace Resume.Application.CQRS.Queries.EducationQuery
 {
     public class EducationQueryHandler : IEducationQueryHandler
     {
@@ -62,7 +62,7 @@ namespace Resume.Application.Queries.EducationQuery
                 .ToList();
         }
 
-        public async Task<UpdateEducationDto?> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken)
+        public async Task<UpdateEducationDto> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken)
         {
             var education = await _educationRepository.GetByIdAsync(id, cancellationToken);
             if (education == null) return null;
