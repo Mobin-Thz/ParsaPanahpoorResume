@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Resume.Application.Commands.EducationCommand;
 using Resume.Application.Commands.ReservationCommand;
 using Resume.Application.Common.Interfaces;
@@ -17,17 +16,11 @@ using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Interfaces.ICommandRepository;
 using Resume.Domain.Interfaces.IQueryRepository;
-using Resume.Infra.Data.MongoDb;
 using Resume.Infra.Data.Repository;
 using Resume.Infra.Data.RepositoryQueries;
 using Resume.Infra.Data.SQLServer.Context;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 namespace Resume.Web;
 
 public class Program
@@ -37,20 +30,18 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
 
-        #region Add DbContext
+        #region DbContext
 
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
         });
 
-        builder.Services.AddDbContext<MongoDbContext>(options =>
+        builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var mongoConnection = builder.Configuration.GetConnectionString("MongoDb");
-            var dbName = builder.Configuration["MongoSettings:DatabaseName"];
-
-            options.UseMongoDB(mongoConnection, dbName);
+            options.UseNpgsql(builder.Configuration.GetConnectionString("SqlServerConnection"));
         });
+
 
         #endregion
 
@@ -82,6 +73,8 @@ public class Program
         builder.Services.AddScoped<IReservationQueryRepository, ReservationQueryRepository>();
         builder.Services.AddScoped<IEducationCommandRepository, EducationCommandRepository>();
         builder.Services.AddScoped<IEducationQueryRepository, EducationQueryRepository>();
+
+
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
         #endregion

@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using Resume.Application.Common.Interfaces;
 using Resume.Domain.Entity.Common;
-using Resume.Domain.Interfaces;
 using Resume.Domain.Interfaces.IQueryRepository;
 using Resume.Infra.Data.MongoDb;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,16 +13,17 @@ namespace Resume.Infra.Data.RepositoryQueries
 
     public class GenericQueryRepository<TEntity> : IGenericQueryRepository<TEntity> where TEntity : class, IEntity
     {
-        private readonly MongoDbContext _dbContext;
-        public GenericQueryRepository(MongoDbContext dbContext)
+        private readonly PostgresDbContext _dbContext;
+
+        public GenericQueryRepository(PostgresDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
 
-        public async Task<TEntity?> GetByIdAsync(ulong id, CancellationToken cancellationToken)
+        public async Task<TEntity?> GetByIdAsync(ulong Id, CancellationToken cancellationToken)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(p => p.Id == Id, cancellationToken);
         }
 
         public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)

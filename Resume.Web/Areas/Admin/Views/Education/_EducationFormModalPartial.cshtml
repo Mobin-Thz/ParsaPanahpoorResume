@@ -1,13 +1,17 @@
-﻿@model Resume.Domain.ViewModels.Education.CreateOrEditEducationViewModel
+﻿@model Resume.Domain.ViewModels.Education.CreateOrEditEducationViewModel;
 
 @{
     bool isCreate = Model.Id == 0;
     string actionName = isCreate ? "CreateEducation" : "EditEducation";
 }
 
-
-<form id="EducationForm" asp-area="Admin" asp-controller="Education" asp-action="SubmitEducationFormModal"
-      data-ajax="true" data-ajax-begin="StartLoading()" data-ajax-success="EducationFormSubmited">
+<form id="EducationForm"
+      asp-area="Admin"
+      asp-controller="Education"
+      asp-action="@actionName"
+      data-ajax="true"
+      data-ajax-begin="StartLoading()"
+      data-ajax-success="EducationFormSubmited">
 
     <div class="modal-header">
         <h5 class="modal-title">@(isCreate ? "ایجاد" : "ویرایش")</h5>
@@ -16,9 +20,7 @@
         </button>
     </div>
 
-
     <div class="modal-body">
-
         <div class="row">
             <div class="col-12">
 
@@ -30,7 +32,7 @@
                 <div class="form-group">
                     <label asp-for="Title"></label>
                     <div class="controls">
-                        <input type="text" asp-for="Title" class="form-control">
+                        <input type="text" asp-for="Title" class="form-control" />
                     </div>
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
@@ -38,7 +40,7 @@
                 <div class="form-group">
                     <label asp-for="StartDate"></label>
                     <div class="controls">
-                        <input type="text" asp-for="StartDate" class="form-control">
+                        <input type="text" asp-for="StartDate" class="form-control" />
                     </div>
                     <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>
@@ -46,7 +48,7 @@
                 <div class="form-group">
                     <label asp-for="EndDate"></label>
                     <div class="controls">
-                        <input type="number" asp-for="EndDate" class="form-control">
+                        <input type="number" asp-for="EndDate" class="form-control" />
                     </div>
                     <span asp-validation-for="EndDate" class="text-danger"></span>
                 </div>
@@ -54,7 +56,7 @@
                 <div class="form-group">
                     <label asp-for="Order"></label>
                     <div class="controls">
-                        <input type="number" asp-for="Order" class="form-control">
+                        <input type="number" asp-for="Order" class="form-control" />
                     </div>
                     <span asp-validation-for="Order" class="text-danger"></span>
                 </div>
@@ -68,12 +70,13 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-bold btn-pure float-right @(isCreate ? "btn-success" : "btn-warning")">@(isCreate ? "ایجاد" : "ویرایش")</button>
+                    <button type="submit"
+                            class="btn btn-bold btn-pure float-right @(isCreate ? "btn-success" : "btn-warning")">
+                        @(isCreate ? "ایجاد" : "ویرایش")
+                    </button>
                 </div>
 
             </div>
         </div>
-
     </div>
-
 </form>

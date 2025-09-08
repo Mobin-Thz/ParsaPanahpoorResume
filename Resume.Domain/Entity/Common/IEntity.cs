@@ -8,6 +8,6 @@ namespace Resume.Domain.Entity.Common
 {
     public interface IEntity
     {
-
+        ulong Id { get; set; }
     }
 }

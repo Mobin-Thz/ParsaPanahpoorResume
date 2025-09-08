@@ -15,7 +15,7 @@ namespace Resume.Infra.Data.RepositoryQueries
 {
     public class EducationQueryRepository :GenericQueryRepository<Education>, IEducationQueryRepository
     {
-        public EducationQueryRepository(MongoDbContext dbContext) : base(dbContext)
+        public EducationQueryRepository(PostgresDbContext dbContext) : base(dbContext)
         {
 
         }

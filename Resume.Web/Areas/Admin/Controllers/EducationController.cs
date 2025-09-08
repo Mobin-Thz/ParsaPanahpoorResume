@@ -32,42 +32,51 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadEducationFormModal(ulong id, CancellationToken cancellationToken)
         {
-            UpdateEducationDto dto = await _educationQuery.GetEducationForEditAsync(id, cancellationToken)
-                                    ?? new UpdateEducationDto { Id = 0 }; // empty for create
+            var dto = await _educationQuery.GetEducationForEditAsync(id, cancellationToken)
+                        ?? new UpdateEducationDto { Id = 0 };
 
-            return PartialView("_EducationFormModalPartial", dto);
+            var viewModel = new CreateOrEditEducationViewModel
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                Order = dto.Order,
+                Description = dto.Description
+            };
+
+
+            return PartialView("_EducationFormModalPartial", viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEducationById(ulong id, CancellationToken cancellationToken)
+        {
+            Console.WriteLine($"Id received: {id}");
+            var education = await _educationQuery.GetEducationById(id, cancellationToken);
+            Console.WriteLine($"Education found: {education != null}");
+            return Json(education);
         }
 
 
+        //Debugging
+
+
+        ////Debugging
         //[HttpPost]
-        //public async Task<IActionResult> SubmitEducationFormModal(
-        //    UpdateEducationDto dto, CancellationToken cancellationToken)
+        //public async Task<IActionResult> CreateEducation(
+        //    [FromBody] CreateEducationDto dto,
+        //    CancellationToken cancellationToken)
         //{
-        //    bool result;
+        //    if (dto == null)
+        //        return BadRequest("DTO is null");
 
-        //    if (dto.Id == 0)
-        //    {
-        //        var createDto = new CreateEducationDto
-        //        {
-        //            Title = dto.Title,
-        //            Description = dto.Description,
-        //            StartDate = dto.StartDate,
-        //            EndDate = dto.EndDate,
-        //            Order = dto.Order
-        //        };
+        //    // Debug check
+        //    Console.WriteLine($"Received Description: '{dto.Description}'");
 
-        //        await _educationCommand.CreateEducation(createDto, cancellationToken);
-        //        result = true;
-        //    }
-        //    else
-        //    {
-        //        result = await _educationCommand.EditEducation(dto, cancellationToken);
-        //    }
+        //    var id = await _educationCommand.CreateEducation(dto, cancellationToken);
 
-        //    if (result)
-        //        return Json(new { status = "Success" });
-
-        //    return Json(new { status = "Error" });
+        //    return Json(new { status = "Success", id });
         //}
 
         [HttpPost]
