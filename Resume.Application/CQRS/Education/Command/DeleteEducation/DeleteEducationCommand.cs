@@ -1,12 +1,13 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resume.Application.DTO.Education
+namespace Resume.Application.CQRS.Education.Command.DeleteEducation
 {
-    public class DeleteEducationDto
+    public class DeleteEducationcommand : IRequest<bool>
     {
         public ulong Id { get; set; }
 

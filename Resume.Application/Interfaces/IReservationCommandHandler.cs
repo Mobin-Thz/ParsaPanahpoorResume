@@ -1,4 +1,4 @@
-﻿using Resume.Application.DTO.Reservation;
+﻿using Resume.Application.CQRS.Reservation.Command;
 using Resume.Domain.Entity.Reservation;
 using Resume.Domain.ViewModels.Reservation;
 using System;

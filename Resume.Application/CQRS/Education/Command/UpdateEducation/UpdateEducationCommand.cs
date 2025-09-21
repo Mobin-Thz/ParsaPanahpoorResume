@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resume.Application.DTO.Education
+namespace Resume.Application.CQRS.Education.Command.UpdateEducation
 {
-    public class UpdateEducationDto
+    public class UpdateEducationcommand
     {
         public ulong Id { get; set; }
         public string Title { get; set; }

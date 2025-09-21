@@ -1,5 +1,5 @@
 ﻿using Resume.Application.Commands.EducationCommand;
-using Resume.Application.DTO.Education;
+using Resume.Application.CQRS.Education.Command.UpdateEducation;
 using Resume.Application.Queries.EducationQuery;
 using Resume.Domain.ViewModels.Education;
 using System;
@@ -15,7 +15,7 @@ namespace Resume.Application.Interfaces
     {
         Task<EducationViewModel> GetEducationById(ulong id, CancellationToken cancellationToken);
         Task<List<EducationViewModel>> GetAllEducations(CancellationToken cancellationToken);
-        Task<UpdateEducationDto?> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken);
+        Task<UpdateEducationcommand?> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken);
 
 
     }

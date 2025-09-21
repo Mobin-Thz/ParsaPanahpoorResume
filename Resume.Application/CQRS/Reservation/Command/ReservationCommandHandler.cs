@@ -1,7 +1,6 @@
 ﻿using Resume.Application.Common.Interfaces;
 using Resume.Application.Convertors;
 using Resume.Application.DTO.Education;
-using Resume.Application.DTO.Reservation;
 using Resume.Application.Interfaces;
 using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Interfaces.ICommandRepository;
@@ -14,7 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.CQRS.Commands.ReservationCommand
+namespace Resume.Application.CQRS.Reservation.Command
 {
     public class ReservationCommandHandler : IReservationCommandHandler
     {

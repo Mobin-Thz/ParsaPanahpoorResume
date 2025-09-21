@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.DTO.Education;
+using Resume.Application.CQRS.Education.Command;
+using Resume.Application.CQRS.Education.Command.UpdateEducation;
 using Resume.Application.Interfaces;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.ViewModels.Education;
@@ -33,7 +34,7 @@ namespace Resume.Web.Areas.Admin.Controllers
         public async Task<IActionResult> LoadEducationFormModal(ulong id, CancellationToken cancellationToken)
         {
             var dto = await _educationQuery.GetEducationForEditAsync(id, cancellationToken)
-                        ?? new UpdateEducationDto { Id = 0 };
+                        ?? new UpdateEducationcommand { Id = 0 };
 
             var viewModel = new CreateOrEditEducationViewModel
             {
@@ -93,7 +94,7 @@ namespace Resume.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditEducation(UpdateEducationDto dto, CancellationToken cancellationToken)
+        public async Task<IActionResult> EditEducation(UpdateEducationcommand dto, CancellationToken cancellationToken)
         {
             if (dto == null || dto.Id == 0) return BadRequest();
 

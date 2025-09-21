@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resume.Application.DTO.Reservation
+namespace Resume.Application.CQRS.Reservation.Command
 {
     public class ReservationDateDto
     {

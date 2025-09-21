@@ -8,15 +8,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Resume.Application;
 using Resume.Application.Common.Interfaces;
-using Resume.Application.CQRS.Commands.EducationCommand;
-using Resume.Application.CQRS.Commands.ReservationCommand;
-using Resume.Application.CQRS.Queries.EducationQuery;
-using Resume.Application.CQRS.Queries.ReservationQuery;
+using Resume.Application.CQRS.Education.Command.CreateEducation;
+using Resume.Application.CQRS.Education.Query;
+using Resume.Application.CQRS.Reservation.Command;
+using Resume.Application.CQRS.Reservation.Query;
 using Resume.Application.Interfaces;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Interfaces.ICommandRepository;
 using Resume.Domain.Interfaces.IQueryRepository;
+using Resume.Infra.Data.Repository;
 using Resume.Infra.Data.Repository.Commands;
 using Resume.Infra.Data.Repository.Queries;
 using Resume.Infra.Data.SQLServer.Context;
@@ -67,8 +68,8 @@ public class Program
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //Handler Registration
-        builder.Services.AddScoped<IEducationCommandHandler, EducationCommandHandler>();
-        builder.Services.AddScoped<IEducationQueryHandler, EducationQueryHandler>();
+        //builder.Services.AddScoped<IEducationCommandHandler, CreateEducationHandler>();
+        //builder.Services.AddScoped<IEducationQueryHandler, EducationQueryHandler>();
         builder.Services.AddScoped<IReservationCommandHandler, ReservationCommandHandler>();
         builder.Services.AddScoped<IReservationQueryHandler, ReservationQueryHandler>();
         //Repository Registration

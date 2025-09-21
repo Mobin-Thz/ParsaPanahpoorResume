@@ -1,6 +1,6 @@
 ﻿using Resume.Application.Commands.EducationCommand;
 using Resume.Application.Common.Interfaces;
-using Resume.Application.DTO.Education;
+using Resume.Application.CQRS.Education.Command.UpdateEducation;
 using Resume.Application.Interfaces;
 using Resume.Domain.Interfaces.IQueryRepository;
 using Resume.Domain.ViewModels.Education;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.CQRS.Queries.EducationQuery
+namespace Resume.Application.CQRS.Education.Query
 {
     public class EducationQueryHandler : IEducationQueryHandler
     {
@@ -62,12 +62,12 @@ namespace Resume.Application.CQRS.Queries.EducationQuery
                 .ToList();
         }
 
-        public async Task<UpdateEducationDto> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken)
+        public async Task<UpdateEducationcommand> GetEducationForEditAsync(ulong id, CancellationToken cancellationToken)
         {
             var education = await _educationRepository.GetByIdAsync(id, cancellationToken);
             if (education == null) return null;
 
-            return new UpdateEducationDto
+            return new UpdateEducationcommand
             {
                 Id = education.Id,
                 Title = education.Title,
